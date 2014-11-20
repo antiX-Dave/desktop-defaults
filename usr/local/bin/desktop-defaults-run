@@ -54,14 +54,6 @@ case $1 in
 esac
 
 } 
-. $main_config
-if [ -f "$user_config" ]; then 
-    for user_override in $(diff $user_config $main_config |grep "<" |sed "s/<\ //ig" |grep -v "^#")
-    do
-        eval $user_override;
-    done
-fi
-
 #Desktop_Prefix="/usr/share/applications/desktop-defaults-"
 if [ -d ~/.local/share/desktop-defaults/ ]; then
     Desktop_Prefix="$HOME/.local/share/desktop-defaults/"
