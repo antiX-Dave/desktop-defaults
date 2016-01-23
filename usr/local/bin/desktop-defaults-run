@@ -33,13 +33,13 @@ case $1 in
         args=$(echo "$args" |sed "s/--follow//ig")
         case `head -1 $desktop_file` in
         rox-*)
-            Exec="rox-filer $args"
+            Exec="rox-filer"
             ;;
         space-*)
-            Exec="spacefm $args"
+            Exec="spacefm"
             ;;
         *)
-            Exec="$fallback_fm $args"
+            Exec="$fallback_fm"
             ;;
         esac
     fi
@@ -89,6 +89,7 @@ if [ "$run_as_root" = "True" ]; then
         yad --image="error" --text="The program being started is myself. \n You will need to select a program other than me." --button="OK:0" 2>/dev/null&
         exit
     else
+        echo "$Exec"
         $(gksu "$Exec $args") &
         exit
     fi
@@ -98,6 +99,7 @@ else
         yad --image="error" --text="The program being started is myself. \n You will need to select a program other than me." --button="OK:0" 2>/dev/null &
         exit
     else
+        echo "$Exec"
         $($Exec $args) &
         exit
     fi
