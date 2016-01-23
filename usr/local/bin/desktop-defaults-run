@@ -28,8 +28,9 @@ args=$(echo "$@" |sed "s/$1//ig")
 
 case $1 in 
 -fm|--file-manager)
-    if [ "$2" = "--follow" ]; then
-        args=$(echo "$args" |sed "s/$2//ig")
+    Desktop_File=$Desktop_Prefix"file-manager.desktop"
+    if ( grep "$ME -fm --follow" $Desktop_File > /dev/null 2>&1 ) || [ "$2" = "--follow" ]; then
+        args=$(echo "$args" |sed "s/--follow//ig")
         case `head -1 $desktop_file` in
         rox-*)
             Exec="rox-filer $args"
@@ -42,7 +43,6 @@ case $1 in
             ;;
         esac
     fi
-    Desktop_File=$Desktop_Prefix"file-manager.desktop"
     ;;
 -t|--terminal)          Desktop_File=$Desktop_Prefix"terminal.desktop"      
                         if [ -n "$args" ]; then
