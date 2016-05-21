@@ -62,10 +62,11 @@ if [[ "$Exec" =~ "$ME" ]]; then
   exit 1
 else
   IFS="|"
-  if [ $exec_root = 1 ]; then
+  if [ "$exec_root" = 1 ]; then
     gksu $Exec $args &
     exit
   else
+    echo "$args"
     $Exec $args &
     exit
   fi
