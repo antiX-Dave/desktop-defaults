@@ -32,17 +32,17 @@ do
     -t|--terminal)       Desktop_File="terminal.desktop"     
                          if [ -n "$args" ]; then
                            args="-e|$args"
-                         fi                                                 ;;
+                         fi                                  ;;
     -e|--email)          Desktop_File="email.desktop"        ;;
     -te|--text-editor)   Desktop_File="editor.desktop"       ;;
     -b|--browser)        Desktop_File="web-browser.desktop"  ;;
     -i|--images)         Desktop_File="image-viewer.desktop" ;;
     -v|--video)          Desktop_File="video-player.desktop" ;;
     -a|--audio)          Desktop_File="audio-player.desktop" ;;
-    -r|--root)           exec_root='1'                                      ;;
-    --follow)            fm_follow='1'                                      ;;
-    -h|--help)           help; exit;                                     ;;
-    *)                   i="$i|" && args="$args$i"                        ;;
+    -r|--root)           exec_root='1'                       ;;
+    --follow)            fm_follow='1'                       ;;
+    -h|--help)           help; exit;                         ;;
+    *)                   i="$i|" && args="$args$i"           ;;
   esac
 done
 
@@ -76,7 +76,7 @@ else
     gksu -u root $Exec $args 2>/dev/null &
     exit
   else
-    gksu -u $(whoami) $Exec $args 2>/dev/null &
+    gksu -u $(whoami) $Exec $args & # 2>/dev/null &
     exit
   fi
 fi
